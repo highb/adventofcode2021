@@ -17,10 +17,10 @@ fn main() -> std::io::Result<()> {
             change = "N/A - no previous measurement";
         } else {
             if measurement > last {
-                change = "INCREASING";
+                change = "increased";
                 increasing += 1;
             } else if measurement < last {
-                change = "DECREASING";
+                change = "decreased";
             }
         }
         println!("{} ({})", measurement, change);
