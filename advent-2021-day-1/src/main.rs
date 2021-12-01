@@ -3,19 +3,37 @@ use std::io::prelude::*;
 use std::str::FromStr;
 
 fn main() -> std::io::Result<()> {
-    let mut file = File::open("./input")?;
+    // Accept a file path as the only CLI arg
+    let path = std::env::args().nth(1).expect("USAGE: cmd <file>");
+
+    // Read in file
+    let mut file = File::open(path)?;
     let mut puzzle_input = String::new();
     file.read_to_string(&mut puzzle_input)?;
 
+    let measurements: Vec<i32> = input_to_measurements(puzzle_input);
+    let increased = measurement_statistics(measurements);
+
+    println!("Increased {} times", increased);
+
+    Ok(())
+}
+
+fn input_to_measurements(input: String) -> Vec<i32> {
     let mut measurements: Vec<i32> = Vec::new();
-    for input in puzzle_input.lines() {
-        measurements.push(i32::from_str(input).unwrap());
+
+    for line in input.lines() {
+        measurements.push(i32::from_str(line).unwrap());
     }
 
+    return measurements
+}
+
+fn measurement_statistics(measurements: Vec<i32>) -> i32 {
     let mut last = -1;
     let mut increasing = 0;
     for window in measurements.windows(3) {
-        println!("{:#?}", window);
+        //println!("{:#?}", window);
         let mut change = "";
         let measurement = window.iter().sum();
         if last < 0 {
@@ -28,11 +46,9 @@ fn main() -> std::io::Result<()> {
                 change = "decreased";
             }
         }
-        println!("{} ({})", measurement, change);
+        //println!("{} ({})", measurement, change);
         last = measurement;
     }
 
-    println!("Increased {} times", increasing);
-
-    Ok(())
+    return increasing
 }
