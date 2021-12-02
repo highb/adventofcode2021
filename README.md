@@ -6,6 +6,6 @@ These are my [2021 Advent of Code](https://adventofcode.com/) solutions.
 
 ```bash
 rustup
-cd <dir>
-cargo run
+cd advent-2021-day-1
+cargo run input
 ```
