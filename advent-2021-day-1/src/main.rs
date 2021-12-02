@@ -2,7 +2,12 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::str::FromStr;
 
+#[macro_use]
+extern crate log;
+
 fn main() -> std::io::Result<()> {
+    env_logger::init();
+
     // Accept a file path as the only CLI arg
     let path = std::env::args().nth(1).expect("USAGE: cmd <file>");
 
@@ -33,7 +38,7 @@ fn measurement_statistics(measurements: Vec<i32>) -> i32 {
     let mut last = -1;
     let mut increasing = 0;
     for window in measurements.windows(3) {
-        //println!("{:#?}", window);
+        debug!("{:#?}", window);
         let mut change = "";
         let measurement = window.iter().sum();
         if last < 0 {
@@ -46,7 +51,7 @@ fn measurement_statistics(measurements: Vec<i32>) -> i32 {
                 change = "decreased";
             }
         }
-        //println!("{} ({})", measurement, change);
+        debug!("{} ({})", measurement, change);
         last = measurement;
     }
 
