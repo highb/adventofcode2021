@@ -12,6 +12,8 @@ env:
 jobs:
   build-day-1:
     runs-on: ubuntu-latest
+    env:
+      WORKING_DIR: advent-2021-day-1
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
@@ -20,10 +22,10 @@ jobs:
         toolchain: stable
     - uses: Swatinem/rust-cache@v1
       with:
-        working-directory: advent-2021-day-1
+        working-directory: ${{ env.WORKING_DIR }}
     - name: Build Day 1
       run: cargo build --verbose
-      working-directory: advent-2021-day-1
+      working-directory: ${{ env.WORKING_DIR }}
     - name: Run
       run: cargo run --verbose input
-      working-directory: advent-2021-day-1
+      working-directory: ${{ env.WORKING_DIR }}
