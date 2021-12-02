@@ -19,7 +19,8 @@ jobs:
         profile: minimal
         toolchain: stable
     - uses: Swatinem/rust-cache@v1
-
+      with:
+        working-directory: advent-2021-day-1
     - name: Build Day 1
       run: cargo build --verbose
       working-directory: advent-2021-day-1
