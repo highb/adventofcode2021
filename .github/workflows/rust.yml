@@ -15,12 +15,12 @@ jobs:
     env:
       WORKING_DIR: advent-2021-day-1
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions-rs/toolchain@v1
       with:
         profile: minimal
         toolchain: stable
-    - uses: Swatinem/rust-cache@v1
+    - uses: Swatinem/rust-cache@v2
       with:
         working-directory: ${{ env.WORKING_DIR }}
     - name: Build Day 1
